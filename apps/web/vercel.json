@@ -29,5 +29,6 @@
       "schedule": "*/5 * * * *"
     }
   ],
-  "functions": {}
+  "buildCommand": "cd ../.. && yarn turbo build --filter=@calcom/web",
+  "outputDirectory": ".next"
 }
