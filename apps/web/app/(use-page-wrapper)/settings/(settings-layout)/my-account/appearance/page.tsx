@@ -35,7 +35,7 @@ const Page = async () => {
   const [meCaller, hasTeamPlan, dbUser] = await Promise.all([
     createRouterCaller(meRouter),
     getCachedHasTeamPlan(userId),
-    prisma.user.findUnique({ where: { id: userId }, select: { metadata: true } }),
+    prisma.user.findUnique({ where: { id: userId! }, select: { metadata: true } }),
   ]);
 
   const user = await meCaller.get();
