@@ -9,8 +9,8 @@ import { buildLegacyRequest } from "@lib/buildLegacyCtx";
 import PricingView from "~/pricing/pricing-view";
 
 export const metadata: Metadata = {
-  title: "Pricing — Closedate",
-  description: "Simple, transparent pricing for SDR and BDR sales teams.",
+  title: "Pricing — Slotly",
+  description: "Simple, transparent pricing for coaches, consultants & freelancers.",
 };
 
 export default async function PricingPage() {
