@@ -1,6 +1,6 @@
 # Session Bundle / Package Bookings — Technical Spec
 
-**Status:** Draft — awaiting implementation (SON-14 stretch goal)  
+**Status:** Backend implemented (SON-14 stretch goal complete) — UI phase pending  
 **Author:** SkunkCTO  
 **Date:** 2026-05-13  
 
@@ -146,12 +146,15 @@ if credit found, auto-rejects if not.
 
 ## Acceptance Criteria (implementation phase)
 
-- [ ] `SessionBundle` and `BundlePurchase` tables exist in DB
-- [ ] Coach can create a bundle product via `/slotly/bundles/new`
-- [ ] Client can purchase a 5-session pack via Stripe Checkout
-- [ ] On BOOKING_CREATED, one credit is debited
-- [ ] Booking is rejected (via approval flow) when credits are exhausted
-- [ ] Client sees remaining credits on the booking page
+- [x] `SessionBundle`, `BundlePurchase`, `BundleBookingUsage` tables in Prisma schema
+- [ ] Coach can create a bundle product via `/slotly/bundles/new` (UI — Phase 2)
+- [x] Client can purchase a 5-session pack via Stripe Checkout (`/api/slotly/bundles/checkout`)
+- [x] On BOOKING_CREATED, one credit is debited (`/api/slotly/bundles/use-credit`)
+- [x] Credits exhausted → 402 response (booking workflow auto-rejects via approval flow)
+- [ ] Client sees remaining credits on the booking page (UI — Phase 2)
+
+### Env vars required (add to DEPLOY.md / Vercel settings)
+- `STRIPE_BUNDLE_WEBHOOK_SECRET` — from Stripe dashboard after registering `/api/slotly/bundles/webhook`
 
 ---
 

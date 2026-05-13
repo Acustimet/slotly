@@ -509,6 +509,7 @@ model User {
   holidaySettings                UserHolidaySettings?
 
   autoOptInFeatures Boolean @default(false)
+  sessionBundles    SessionBundle[]
 
   @@unique([email])
   @@unique([email, username])
@@ -2848,4 +2849,48 @@ model AttributeSyncFieldMapping {
 
   @@unique([integrationAttributeSyncId, attributeId])
   @@index([integrationAttributeSyncId])
+}
+
+// Slotly: Session bundle / package bookings (SON-14)
+model SessionBundle {
+  id            String   @id @default(cuid())
+  userId        Int
+  name          String
+  sessionCount  Int
+  price         Int
+  currency      String   @default("usd")
+  stripePriceId String?
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purchases     BundlePurchase[]
+}
+
+model BundlePurchase {
+  id              String         @id @default(cuid())
+  bundleId        String
+  attendeeEmail   String
+  attendeeName    String
+  creditsTotal    Int
+  creditsUsed     Int            @default(0)
+  stripeSessionId String?        @unique
+  paidAt          DateTime?
+  expiresAt       DateTime?
+  createdAt       DateTime       @default(now())
+  bundle          SessionBundle  @relation(fields: [bundleId], references: [id], onDelete: Cascade)
+  bookingUsages   BundleBookingUsage[]
+
+  @@index([attendeeEmail])
+  @@index([bundleId])
+}
+
+model BundleBookingUsage {
+  id         String         @id @default(cuid())
+  purchaseId String
+  bookingUid String
+  usedAt     DateTime       @default(now())
+  purchase   BundlePurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+
+  @@index([purchaseId])
+  @@index([bookingUid])
 }

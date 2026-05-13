@@ -83,6 +83,9 @@ CRON_ENABLE_APP_SYNC=false
 NEXT_PUBLIC_EMBED_LIB_URL=https://slotly.vercel.app/embed/embed.js
 GOOGLE_LOGIN_ENABLED=false
 OUTLOOK_LOGIN_ENABLED=false
+# Slotly vertical features
+SLOTLY_WEBHOOK_SECRET=[generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"]
+STRIPE_BUNDLE_WEBHOOK_SECRET=[from Stripe dashboard after registering /api/slotly/bundles/webhook]
 ```
 
 ---
