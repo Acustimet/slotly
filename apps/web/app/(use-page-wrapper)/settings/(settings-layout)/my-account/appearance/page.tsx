@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
 import { IS_SELF_HOSTED } from "@calcom/lib/constants";
 import hasKeyInMetadata from "@calcom/lib/hasKeyInMetadata";
+import prisma from "@calcom/prisma";
 import { meRouter } from "@calcom/trpc/server/routers/viewer/me/_router";
 import { getCachedHasTeamPlan } from "@calcom/web/app/cache/membership";
 
@@ -31,9 +32,10 @@ const Page = async () => {
     redirect(redirectUrl);
   }
 
-  const [meCaller, hasTeamPlan] = await Promise.all([
+  const [meCaller, hasTeamPlan, dbUser] = await Promise.all([
     createRouterCaller(meRouter),
     getCachedHasTeamPlan(userId),
+    prisma.user.findUnique({ where: { id: userId }, select: { metadata: true } }),
   ]);
 
   const user = await meCaller.get();
@@ -43,7 +45,10 @@ const Page = async () => {
   }
   const isCurrentUsernamePremium =
     user && hasKeyInMetadata(user, "isPremium") ? !!user.metadata.isPremium : false;
-  const hasPaidPlan = IS_SELF_HOSTED ? true : hasTeamPlan?.hasTeamPlan || isCurrentUsernamePremium;
+  const slotlyPlan = (dbUser?.metadata as Record<string, unknown> | null)?.closedatePlan;
+  const hasSlotlyPaidPlan = slotlyPlan === "pro" || slotlyPlan === "team";
+  const hasPaidPlan =
+    IS_SELF_HOSTED ? true : hasTeamPlan?.hasTeamPlan || isCurrentUsernamePremium || hasSlotlyPaidPlan;
 
   return <AppearancePage user={user} hasPaidPlan={hasPaidPlan} />;
 };
