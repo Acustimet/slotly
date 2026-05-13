@@ -13,12 +13,12 @@ export default function BundleSuccessPage({
   return (
     <div className="mx-auto max-w-md px-4 py-24 text-center">
       <div className="mb-6 text-5xl">✓</div>
-      <h1 className="text-emphasis mb-3 text-2xl font-bold">Bundle purchased!</h1>
+      <h1 className="text-emphasis mb-3 text-2xl font-bold">Payment received!</h1>
       <p className="text-default mb-8 text-base">
-        Your session credits are active. Book your first session using the link your provider shared
-        with you.
+        Your session bundle purchase is confirmed. Credits will be activated within a minute — use
+        the booking link your provider shared to schedule your first session.
       </p>
-      {searchParams.session_id && (
+      {searchParams.session_id && searchParams.session_id.length > 0 && (
         <p className="text-subtle mb-8 text-xs">
           Reference: {searchParams.session_id.slice(0, 24)}…
         </p>
