@@ -1,0 +1,24 @@
+# Large media files not needed for the build
+packages/app-store/**/*.mp4
+packages/app-store/**/*.webm
+packages/app-store/**/*.jpeg
+packages/app-store/**/*.jpg
+
+# Large app-store images (non-icon)
+packages/app-store/campfire/static/*.png
+packages/app-store/intercom/static/*.png
+packages/app-store/facetime/static/*.png
+packages/app-store/salesroom/static/*.png
+packages/app-store/salesroom/static/*.jpeg
+
+# TypeScript build info (regenerated on build)
+**/*.tsbuildinfo
+
+# Test and e2e files
+**/e2e/
+**/*.test.ts
+**/*.spec.ts
+**/*.test.tsx
+**/*.spec.tsx
+**/*.test.js
+**/*.spec.js
