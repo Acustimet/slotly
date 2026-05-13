@@ -39,7 +39,10 @@ export default function Credits() {
             commitHash
           )}
         </>
-      )}
+      )}{" · "}
+      <Link href="https://github.com/Acustimet/slotly" target="_blank" className="hover:underline">
+        Source code (AGPL-3.0)
+      </Link>
     </small>
   );
 }
