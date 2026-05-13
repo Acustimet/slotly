@@ -67,7 +67,7 @@ export default function PricingView({ currentPlan }: { currentPlan?: string | nu
     setLoading(planId);
     setError(null);
     try {
-      const res = await fetch("/api/closedate/checkout", {
+      const res = await fetch("/api/slotly/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan: planId }),

@@ -12,8 +12,8 @@ const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY ?? "", {
 });
 
 const PRICE_IDS: Record<string, string | undefined> = {
-  pro: process.env.CLOSEDATE_PRO_PRICE_ID,
-  team: process.env.CLOSEDATE_TEAM_PRICE_ID,
+  pro: process.env.SLOTLY_PRO_PRICE_ID,
+  team: process.env.SLOTLY_TEAM_PRICE_ID,
 };
 
 export async function POST(req: Request) {
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   if (!priceId) {
     return NextResponse.json(
       {
-        error: `Price ID for plan '${plan}' is not configured. Set CLOSEDATE_${plan.toUpperCase()}_PRICE_ID env var.`,
+        error: `Price ID for plan '${plan}' is not configured. Set SLOTLY_${plan.toUpperCase()}_PRICE_ID env var.`,
       },
       { status: 500 }
     );

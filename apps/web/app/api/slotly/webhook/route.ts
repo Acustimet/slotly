@@ -7,11 +7,11 @@ const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY ?? "", {
   apiVersion: "2020-08-27",
 });
 
-const WEBHOOK_SECRET = process.env.CLOSEDATE_STRIPE_WEBHOOK_SECRET ?? "";
+const WEBHOOK_SECRET = process.env.SLOTLY_STRIPE_WEBHOOK_SECRET ?? "";
 
 function planFromPriceId(priceId: string): string | null {
-  if (priceId === process.env.CLOSEDATE_PRO_PRICE_ID) return "pro";
-  if (priceId === process.env.CLOSEDATE_TEAM_PRICE_ID) return "team";
+  if (priceId === process.env.SLOTLY_PRO_PRICE_ID) return "pro";
+  if (priceId === process.env.SLOTLY_TEAM_PRICE_ID) return "team";
   return null;
 }
 
@@ -112,7 +112,7 @@ export async function POST(req: Request) {
         break;
     }
   } catch (err) {
-    console.error("[closedate/webhook] handler error:", err);
+    console.error("[slotly/webhook] handler error:", err);
     return NextResponse.json({ error: "Handler error" }, { status: 500 });
   }
 
