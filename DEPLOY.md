@@ -86,6 +86,11 @@ OUTLOOK_LOGIN_ENABLED=false
 # Slotly vertical features
 SLOTLY_WEBHOOK_SECRET=[generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"]
 STRIPE_BUNDLE_WEBHOOK_SECRET=[from Stripe dashboard after registering /api/slotly/bundles/webhook]
+# Slotly SaaS billing (Stripe subscriptions)
+STRIPE_PRIVATE_KEY=[sk_test_... from Stripe dashboard → Developers → API keys]
+SLOTLY_PRO_PRICE_ID=[price_... create a $9/mo recurring price in Stripe Products]
+SLOTLY_TEAM_PRICE_ID=[price_... create a $29/mo recurring price in Stripe Products]
+SLOTLY_STRIPE_WEBHOOK_SECRET=[whsec_... from Stripe dashboard after registering /api/slotly/webhook]
 ```
 
 ---
