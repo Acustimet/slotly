@@ -28,8 +28,5 @@
       "path": "/api/cron/selected-calendars",
       "schedule": "0 8 * * *"
     }
-  ],
-  "installCommand": "cd ../.. && yarn install",
-  "buildCommand": "cd ../.. && yarn turbo build --filter=@calcom/web",
-  "outputDirectory": ".next"
+  ]
 }
