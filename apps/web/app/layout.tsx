@@ -10,6 +10,7 @@ import Script from "next/script";
 import type React from "react";
 
 import "../styles/globals.css";
+import "../styles/slotly-brand.css";
 import { AppRouterI18nProvider } from "./AppRouterI18nProvider";
 import { Providers } from "./providers";
 import { SpeculationRules } from "./SpeculationRules";
@@ -42,39 +43,37 @@ export const viewport = {
 };
 
 export const metadata = {
+  title: {
+    default: "Slotly — Book, pay, done.",
+    template: "%s | Slotly",
+  },
+  description:
+    "Scheduling with built-in payments for coaches, consultants, and freelancers. Your clients book and pay in one step — no chasing invoices.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_WEBAPP_URL || "https://slotly.vercel.app"),
+  openGraph: {
+    title: "Slotly — Book, pay, done.",
+    description:
+      "Scheduling with built-in payments for coaches, consultants, and freelancers.",
+    url: process.env.NEXT_PUBLIC_WEBAPP_URL || "https://slotly.vercel.app",
+    siteName: "Slotly",
+    type: "website",
+  },
   icons: {
-    icon: "/api/logo?type=favicon-32",
-    apple: "/api/logo?type=apple-touch-icon",
+    icon: "/slotly-favicon.png",
+    apple: "/apple-touch-icon.png",
     other: [
-      {
-        rel: "icon-mask",
-        url: "/safari-pinned-tab.svg",
-        color: "#000000",
-      },
-      {
-        url: "/api/logo?type=favicon-16",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/api/logo?type=favicon-32",
-        sizes: "32x32",
-        type: "image/png",
-      },
+      { rel: "mask-icon", url: "/safari-pinned-tab.svg", color: "#4F46E5" },
     ],
   },
   manifest: "/site.webmanifest",
-  other: {
-    "application-TileColor": "#ff0000",
-  },
   twitter: {
-    site: "@calcom",
-    creator: "@calcom",
     card: "summary_large_image",
+    site: "@slotlyapp",
+    creator: "@slotlyapp",
   },
-  robots: {
-    index: true,
-    follow: true,
+  robots: { index: true, follow: true },
+  other: {
+    "msapplication-TileColor": "#4F46E5",
   },
 };
 

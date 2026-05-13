@@ -1,0 +1,30 @@
+/**
+ * Slotly brand tokens — import in global CSS after Cal.com base styles.
+ * Overrides Cal.com's blue-500 primary with Slotly indigo/emerald palette.
+ */
+
+:root {
+  /* Brand primaries */
+  --brand-color: #4F46E5;          /* indigo-600 — primary actions, links */
+  --brand-color-dark: #4338CA;     /* indigo-700 — hover state */
+  --brand-color-light: #EEF2FF;    /* indigo-50 — backgrounds, badges */
+
+  /* Payment accent */
+  --brand-accent: #059669;         /* emerald-600 — payment, success, money */
+  --brand-accent-light: #ECFDF5;   /* emerald-50 */
+
+  /* Text */
+  --brand-text: #0F172A;           /* slate-900 */
+  --brand-text-muted: #64748B;     /* slate-500 */
+
+  /* Cal.com CSS variable overrides */
+  --cal-brand: #4F46E5;
+  --cal-brand-emphasis: #4338CA;
+  --cal-brand-text: #ffffff;
+  --cal-brand-subtle: #EEF2FF;
+}
+
+/* Override Cal.com's hardcoded blue with Slotly indigo */
+.bg-brand, [class*="bg-brand"] { background-color: var(--brand-color) !important; }
+.text-brand, [class*="text-brand"] { color: var(--brand-color) !important; }
+.border-brand, [class*="border-brand"] { border-color: var(--brand-color) !important; }

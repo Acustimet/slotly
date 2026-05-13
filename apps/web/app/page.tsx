@@ -1,29 +1,16 @@
-import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-
-import { checkOnboardingRedirect } from "@calcom/features/auth/lib/onboardingUtils";
 import { getServerSession } from "@calcom/features/auth/lib/getServerSession";
+import { buildLegacyCtx } from "@calcom/lib/buildLegacyCtx";
+import { headers, cookies } from "next/headers";
+import SlotlyLandingPage from "@components/slotly/LandingPage";
 
-import { buildLegacyRequest } from "@lib/buildLegacyCtx";
+export default async function RootPage() {
+  const legacyCtx = buildLegacyCtx(await headers(), await cookies());
+  const session = await getServerSession({ req: legacyCtx });
 
-const RedirectPage = async () => {
-  const session = await getServerSession({ req: buildLegacyRequest(await headers(), await cookies()) });
-
-  if (!session?.user?.id) {
-    redirect("/auth/login");
+  if (session?.user?.id) {
+    redirect("/event-types");
   }
 
-  // Check if user needs onboarding and redirect before going to event-types
-  const organizationId = session.user.profile?.organizationId ?? null;
-  const onboardingPath = await checkOnboardingRedirect(session.user.id, {
-    checkEmailVerification: true,
-    organizationId,
-  });
-  if (onboardingPath) {
-    redirect(onboardingPath);
-  }
-
-  redirect("/event-types");
-};
-
-export default RedirectPage;
+  return <SlotlyLandingPage />;
+}
