@@ -76,6 +76,11 @@ const getTabs = (
           href: "/settings/my-account/push-notifications",
           trackingMetadata: { section: "my_account", page: "push_notifications" },
         },
+        {
+          name: "session_bundles",
+          href: "/settings/slotly/bundles",
+          trackingMetadata: { section: "my_account", page: "session_bundles" },
+        },
         // TODO
         // { name: "referrals", href: "/settings/my-account/referrals" },
       ],
