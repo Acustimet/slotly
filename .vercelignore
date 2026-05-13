@@ -1,3 +1,7 @@
+node_modules
+.next
+.turbo
+
 # Large media files not needed for the build
 packages/app-store/**/*.mp4
 packages/app-store/**/*.webm
