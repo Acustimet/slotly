@@ -3,403 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slotly — Scheduling built for SDR teams</title>
-  <meta name="description" content="The booking link your sales team actually needs. CRM sync, round-robin routing, and no-show follow-up built in. $15/mo per rep.">
-  <meta property="og:title" content="Slotly — Scheduling built for closing">
-  <meta property="og:description" content="Calendly for outbound sales teams. Syncs to HubSpot/Salesforce, routes to the right rep, and follows up on no-shows automatically.">
+  <title>Slotly — Scheduling + Payments for Coaches and Consultants</title>
+  <meta name="description" content="Book clients and collect payment in one link. $9/mo. No per-transaction fees.">
+  <meta property="og:title" content="Slotly — Scheduling + Payments. $9/mo.">
+  <meta property="og:description" content="Stop juggling Calendly and Stripe. One link, book and pay. Built for coaches, consultants, and freelancers.">
   <meta property="og:type" content="website">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --blue: #0F4C81;
-      --blue-dark: #0a3660;
-      --blue-light: #e8f0fa;
-      --orange: #E85D26;
-      --text: #111;
-      --muted: #666;
-      --border: #e8e8e8;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      color: var(--text);
-      background: #fff;
-      line-height: 1.6;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 2rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-    }
-    .logo { font-size: 1.5rem; font-weight: 800; color: var(--blue); text-decoration: none; letter-spacing: -1px; }
-    .nav-cta {
-      background: var(--orange); color: white; border: none;
-      padding: 0.5rem 1.25rem; border-radius: 8px;
-      font-size: 0.9rem; font-weight: 600; cursor: pointer; text-decoration: none;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: #c94d1e; }
-
-    /* HERO */
-    .hero {
-      max-width: 780px; margin: 5rem auto 4rem;
-      padding: 0 2rem; text-align: center;
-    }
-    .hero-badge {
-      display: inline-block; background: var(--blue-light); color: var(--blue);
-      font-size: 0.78rem; font-weight: 700; padding: 0.3rem 0.85rem;
-      border-radius: 100px; margin-bottom: 1.5rem;
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      font-weight: 900; line-height: 1.1; letter-spacing: -1.5px;
-      margin-bottom: 1.25rem;
-    }
-    h1 span { color: var(--orange); }
-    .hero p {
-      font-size: 1.2rem; color: var(--muted); max-width: 540px;
-      margin: 0 auto 2.5rem;
-    }
-    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--orange); color: white;
-      padding: 0.9rem 2rem; border-radius: 10px;
-      font-size: 1rem; font-weight: 700; text-decoration: none;
-      transition: background 0.2s; display: inline-block;
-    }
-    .btn-primary:hover { background: #c94d1e; }
-    .btn-secondary {
-      background: transparent; color: var(--blue);
-      padding: 0.9rem 2rem; border-radius: 10px;
-      font-size: 1rem; font-weight: 600; text-decoration: none;
-      border: 2px solid var(--blue); transition: all 0.2s; display: inline-block;
-    }
-    .btn-secondary:hover { background: var(--blue); color: white; }
-
-    /* SOCIAL PROOF */
-    .proof {
-      text-align: center; padding: 1.5rem 2rem;
-      color: var(--muted); font-size: 0.9rem; border-bottom: 1px solid var(--border);
-    }
-
-    /* HOW IT WORKS */
-    .section { max-width: 900px; margin: 4rem auto; padding: 0 2rem; }
-    .section-label {
-      font-size: 0.78rem; font-weight: 700; color: var(--orange);
-      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
-    }
-    h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 2.5rem; }
-
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
-    .step {
-      background: #f8f9fa; border-radius: 12px; padding: 1.75rem;
-      border: 1px solid var(--border);
-    }
-    .step-num {
-      width: 2rem; height: 2rem; border-radius: 50%;
-      background: var(--blue); color: white;
-      font-size: 0.85rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .step p { font-size: 0.95rem; color: var(--muted); }
-
-    /* FEATURES */
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-    .feature {
-      padding: 1.75rem; border: 1px solid var(--border); border-radius: 12px;
-    }
-    .feature-icon { font-size: 1.75rem; margin-bottom: 1rem; }
-    .feature h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    :root { --purple: #6c47ff; --purple-dark: #5a38d9; --purple-light: #f0ecff; --muted: #666; --border: #e8e8e8; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #111; background: #fff; line-height: 1.6; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); z-index: 100; }
+    .logo { font-size: 1.5rem; font-weight: 800; color: var(--purple); text-decoration: none; letter-spacing: -1px; }
+    .nav-cta { background: var(--purple); color: white; border: none; padding: 0.5rem 1.25rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--purple-dark); }
+    .hero { max-width: 760px; margin: 5rem auto 4rem; padding: 0 2rem; text-align: center; }
+    .hero-badge { display: inline-block; background: var(--purple-light); color: var(--purple); font-size: 0.78rem; font-weight: 700; padding: 0.3rem 0.85rem; border-radius: 100px; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.8px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; line-height: 1.12; letter-spacing: -1.5px; margin-bottom: 1.25rem; color: #0d0d0d; }
+    .hero h1 .accent { color: var(--purple); }
+    .hero p { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin: 0 auto 2.5rem; }
+    .signup-form { display: flex; gap: 0.5rem; max-width: 460px; margin: 0 auto 1rem; flex-wrap: wrap; justify-content: center; }
+    .signup-form input[type="email"] { flex: 1; min-width: 220px; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .signup-form input[type="email"]:focus { border-color: var(--purple); }
+    .signup-form button { background: var(--purple); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+    .signup-form button:hover { background: var(--purple-dark); }
+    .form-note { font-size: 0.8rem; color: #999; }
+    .social-proof { text-align: center; padding: 2rem; color: #bbb; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+    .comparison { background: #fafafa; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; text-align: center; }
+    .comparison h2 { font-size: 0.8rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2.5rem; }
+    .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 760px; margin: 0 auto; }
+    .compare-card { background: white; border: 1.5px solid var(--border); border-radius: 14px; padding: 1.75rem; text-align: left; }
+    .compare-card.winner { border-color: var(--purple); background: #f9f7ff; }
+    .app-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; }
+    .slotly-name { color: var(--purple); }
+    .price-tag { font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .slotly-price { color: var(--purple); }
+    .compare-card ul { list-style: none; font-size: 0.88rem; color: var(--muted); }
+    .compare-card ul li { padding: 0.22rem 0; }
+    .compare-card ul li.yes::before { content: "\u2713 "; color: #22c55e; font-weight: 700; }
+    .compare-card ul li.no::before  { content: "\u2717 "; color: #ef4444; font-weight: 700; }
+    .features { max-width: 900px; margin: 5rem auto; padding: 0 2rem; }
+    .features h2 { text-align: center; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 3rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; }
+    .feature-icon { font-size: 1.75rem; margin-bottom: 0.6rem; }
+    .feature h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; }
     .feature p { font-size: 0.9rem; color: var(--muted); }
-
-    /* PRICING */
-    .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-    .plan {
-      border: 1px solid var(--border); border-radius: 16px;
-      padding: 2rem; position: relative;
-    }
-    .plan.featured {
-      border-color: var(--blue); border-width: 2px;
-    }
-    .plan-badge {
-      position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
-      background: var(--blue); color: white;
-      font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.75rem;
-      border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .plan-name { font-size: 0.9rem; font-weight: 600; color: var(--muted); margin-bottom: 0.5rem; }
-    .plan-price { font-size: 2.25rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 0.25rem; }
-    .plan-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
-    .plan-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
-    .plan ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
-    .plan ul li {
-      font-size: 0.9rem; padding: 0.4rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .plan ul li:last-child { border-bottom: none; }
-    .check { color: #16a34a; font-weight: 700; }
-    .plan-cta {
-      display: block; text-align: center;
-      background: var(--blue); color: white;
-      padding: 0.75rem; border-radius: 8px;
-      font-size: 0.9rem; font-weight: 600; text-decoration: none;
-      transition: background 0.2s;
-    }
-    .plan-cta:hover { background: var(--blue-dark); }
-    .plan.featured .plan-cta { background: var(--orange); }
-    .plan.featured .plan-cta:hover { background: #c94d1e; }
-
-    /* VS TABLE */
-    .vs-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
-    .vs-table th, .vs-table td {
-      padding: 0.9rem 1rem; text-align: left; font-size: 0.9rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .vs-table th { font-weight: 700; background: #f8f9fa; }
-    .vs-table td:not(:first-child) { text-align: center; }
-    .v-yes { color: #16a34a; font-weight: 700; }
-    .v-no { color: #dc2626; }
-    .v-partial { color: #d97706; }
-
-    /* CTA BAND */
-    .cta-band {
-      background: var(--blue); color: white;
-      text-align: center; padding: 4rem 2rem;
-      margin: 4rem 0 0;
-    }
-    .cta-band h2 { color: white; margin-bottom: 0.75rem; }
-    .cta-band p { color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 2rem; font-size: 1.1rem; }
-    .btn-white {
-      background: white; color: var(--blue);
-      padding: 0.9rem 2rem; border-radius: 10px;
-      font-size: 1rem; font-weight: 700; text-decoration: none;
-      display: inline-block; transition: opacity 0.2s;
-    }
-    .btn-white:hover { opacity: 0.9; }
-
-    /* FOOTER */
-    footer {
-      text-align: center; padding: 2rem;
-      color: var(--muted); font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-    }
-    footer a { color: var(--muted); }
+    .quote-section { background: var(--purple-light); padding: 4rem 2rem; text-align: center; }
+    .quote-section blockquote { max-width: 600px; margin: 0 auto; font-size: 1.2rem; font-style: italic; color: #333; line-height: 1.6; }
+    .quote-section cite { display: block; margin-top: 1rem; font-size: 0.9rem; color: var(--purple); font-style: normal; font-weight: 600; }
+    .pricing { background: #0d0d0d; color: white; padding: 5rem 2rem; text-align: center; }
+    .pricing h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+    .pricing .subtitle { color: #888; margin-bottom: 3rem; font-size: 1rem; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; max-width: 620px; margin: 0 auto 2.5rem; }
+    .plan { background: #1a1a1a; border: 1.5px solid #2a2a2a; border-radius: 16px; padding: 2rem; text-align: left; }
+    .plan.pro { border-color: var(--purple); background: linear-gradient(145deg, #1c1060 0%, #0d0d0d 100%); }
+    .plan-badge { display: inline-block; background: var(--purple); color: white; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.65rem; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.75rem; }
+    .plan h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; color: #eee; }
+    .plan .plan-price { font-size: 2.75rem; font-weight: 800; color: white; margin-bottom: 0.15rem; }
+    .plan .plan-period { font-size: 0.85rem; color: #777; margin-bottom: 1.5rem; }
+    .plan ul { list-style: none; font-size: 0.9rem; color: #bbb; }
+    .plan ul li { padding: 0.3rem 0; }
+    .plan ul li::before { content: "\u2713 "; color: var(--purple); font-weight: 700; }
+    .early-banner { background: #1a1a00; border: 1px solid rgba(245,158,11,0.3); border-radius: 10px; padding: 1rem 1.5rem; font-size: 0.9rem; color: #e5c07b; max-width: 500px; margin: 0 auto; }
+    .early-banner strong { color: #f59e0b; }
+    .cta-bottom { padding: 5rem 2rem; text-align: center; background: linear-gradient(135deg, #f9f7ff 0%, #fff 100%); }
+    .cta-bottom h2 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 1rem; }
+    .cta-bottom p { color: var(--muted); margin-bottom: 2rem; }
+    footer { text-align: center; padding: 2rem; color: #bbb; font-size: 0.85rem; border-top: 1px solid var(--border); }
+    footer a { color: #999; text-decoration: none; }
+    footer a:hover { color: var(--purple); }
+    @media (max-width: 600px) { .hero { margin-top: 3rem; } .hero h1 { font-size: 2rem; } nav { padding: 1rem; } }
   </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a href="/" class="logo">Slotly</a>
-  <a href="#pricing" class="nav-cta">Start free →</a>
+  <a href="#" class="logo">slotly</a>
+  <a href="#signup" class="nav-cta">Get early access</a>
 </nav>
-
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Built for outbound sales teams</div>
-  <h1>Your SDR team's<br><span>booking link</span></h1>
-  <p>Scheduling that syncs to your CRM, routes to the right rep, and follows up when prospects ghost you.</p>
-  <div class="hero-ctas">
-    <a href="#pricing" class="btn-primary">Start free — no card</a>
-    <a href="#how-it-works" class="btn-secondary">See how it works</a>
-  </div>
+  <div class="hero-badge">Early Access &mdash; $7/mo locked in forever</div>
+  <h1>Scheduling + Payments.<br><span class="accent">Stop paying $20/mo</span><br>for half a solution.</h1>
+  <p>Slotly lets coaches, consultants, and freelancers book clients and collect payment in one link. No Zapier. No invoice chasing. No per-transaction fees.</p>
+  <form class="signup-form" id="signup" action="REPLACE_WITH_FORMSPREE_URL" method="POST">
+    <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+    <button type="submit">Get early access</button>
+  </form>
+  <p class="form-note">Free plan included. No credit card required to start.</p>
 </section>
-
-<!-- PROOF -->
-<div class="proof">
-  Used by SDR managers who are tired of Calendly's $20/seat + manual CRM updates
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="how-it-works">
-  <div class="section-label">How it works</div>
-  <h2>From booked to closed, automatically</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h3>Share your team link</h3>
-      <p>One link routes prospects to the right SDR based on territory, availability, or round-robin.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h3>Prospect books</h3>
-      <p>Slotly sends calendar invites, confirmation emails, and reminders automatically.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h3>CRM updates itself</h3>
-      <p>The meeting logs to HubSpot or Salesforce the moment it's booked — no manual entry.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h3>No-shows get followed up</h3>
-      <p>If a prospect misses the call, Slotly sends a re-booking email within 30 minutes.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="section">
-  <div class="section-label">Features</div>
-  <h2>Everything Calendly doesn't do for sales</h2>
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">🔗</div>
-      <h3>HubSpot & Salesforce sync</h3>
-      <p>Every booked meeting logs to your CRM automatically. Create contacts, update deal stages, add notes.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🔄</div>
-      <h3>Round-robin SDR routing</h3>
-      <p>One team link, multiple reps. Slotly distributes bookings evenly or by territory — you decide.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📬</div>
-      <h3>No-show follow-up</h3>
-      <p>When a prospect doesn't show, a re-booking email goes out automatically. No manual chasing.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📋</div>
-      <h3>Pre-meeting brief</h3>
-      <p>Prospects answer intake questions when they book. Your rep gets a summary before the call.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">📊</div>
-      <h3>Booking analytics</h3>
-      <p>See which reps are getting the most meetings, which slots convert best, and where prospects drop.</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🆓</div>
-      <h3>Free for 1 rep</h3>
-      <p>Solo SDR? Free forever. Add your team on Pro or Team when you're ready to scale.</p>
-    </div>
-  </div>
-</section>
-
-<!-- VS TABLE -->
-<section class="section">
-  <div class="section-label">Why Slotly</div>
-  <h2>Calendly is generic. Slotly is for sales.</h2>
-  <table class="vs-table">
-    <thead>
-      <tr>
-        <th>Feature</th>
-        <th>Slotly</th>
-        <th>Calendly Teams</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Round-robin routing</td>
-        <td class="v-yes">✓ Built in</td>
-        <td class="v-partial">⚡ Teams plan only</td>
-      </tr>
-      <tr>
-        <td>HubSpot auto-log</td>
-        <td class="v-yes">✓ Native</td>
-        <td class="v-partial">⚡ App + manual setup</td>
-      </tr>
-      <tr>
-        <td>Salesforce sync</td>
-        <td class="v-yes">✓ Native</td>
-        <td class="v-partial">⚡ Enterprise only</td>
-      </tr>
-      <tr>
-        <td>No-show follow-up email</td>
-        <td class="v-yes">✓ Automatic</td>
-        <td class="v-no">✗ Manual or Zapier</td>
-      </tr>
-      <tr>
-        <td>Pre-meeting intake form</td>
-        <td class="v-yes">✓ Included</td>
-        <td class="v-yes">✓ Included</td>
-      </tr>
-      <tr>
-        <td>Price per seat</td>
-        <td class="v-yes">✓ $15/mo</td>
-        <td class="v-no">✗ $20/mo</td>
-      </tr>
-      <tr>
-        <td>Source code available</td>
-        <td class="v-yes">✓ MIT (GitHub)</td>
-        <td class="v-no">✗ Proprietary</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- PRICING -->
-<section class="section" id="pricing">
-  <div class="section-label">Pricing</div>
-  <h2>Simple pricing, no surprises</h2>
-  <div class="pricing">
-    <div class="plan">
-      <div class="plan-name">Free</div>
-      <div class="plan-price">$0<span>/mo</span></div>
-      <div class="plan-desc">For solo SDRs testing the water</div>
+<div class="social-proof">Built on Cal.com &middot; Open source foundation &middot; Stripe-powered payments</div>
+<section class="comparison">
+  <h2>How Slotly stacks up</h2>
+  <div class="compare-grid">
+    <div class="compare-card">
+      <div class="app-name">Calendly</div>
+      <div class="price-tag">$20<span style="font-size:1rem;font-weight:500;">/mo</span></div>
       <ul>
-        <li><span class="check">✓</span> 1 booking link</li>
-        <li><span class="check">✓</span> Calendar sync</li>
-        <li><span class="check">✓</span> Email reminders</li>
-        <li><span class="check">✓</span> Unlimited bookings</li>
+        <li class="yes">Unlimited event types</li>
+        <li class="no">No payment collection</li>
+        <li class="no">Stripe requires add-on</li>
+        <li class="no">No package selling</li>
+        <li class="no">Free plan: only 1 event</li>
       </ul>
-      <a href="#" class="plan-cta">Get started free</a>
     </div>
-    <div class="plan featured">
+    <div class="compare-card">
+      <div class="app-name">Acuity</div>
+      <div class="price-tag">$20<span style="font-size:1rem;font-weight:500;">/mo</span></div>
+      <ul>
+        <li class="yes">Payments included</li>
+        <li class="no">Dated, complex UI</li>
+        <li class="no">Overkill for solopreneurs</li>
+        <li class="no">Slow to set up</li>
+        <li class="no">No early adopter pricing</li>
+      </ul>
+    </div>
+    <div class="compare-card winner">
+      <div class="app-name slotly-name">Slotly</div>
+      <div class="price-tag slotly-price">$9<span style="font-size:1rem;font-weight:500;">/mo</span></div>
+      <ul>
+        <li class="yes">Unlimited event types</li>
+        <li class="yes">Payments built-in (Stripe)</li>
+        <li class="yes">Package and bundle selling</li>
+        <li class="yes">Clean, modern UI</li>
+        <li class="yes">Early adopter: $7/mo forever</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="features">
+  <h2>Everything you need. Nothing you don't.</h2>
+  <div class="features-grid">
+    <div class="feature"><div class="feature-icon">&#128179;</div><h3>Get paid at booking</h3><p>Connect Stripe once. Clients pay when they book. No invoice chasing, no no-shows.</p></div>
+    <div class="feature"><div class="feature-icon">&#128197;</div><h3>Unlimited booking pages</h3><p>Discovery calls, 1:1 sessions, workshops, group classes. One page per service.</p></div>
+    <div class="feature"><div class="feature-icon">&#128230;</div><h3>Sell session packages</h3><p>Offer 5-session coaching packs or retainers. Clients buy once, book over time.</p></div>
+    <div class="feature"><div class="feature-icon">&#128203;</div><h3>Intake forms included</h3><p>Ask clients what they need before the call. Summary lands in your inbox before the session.</p></div>
+    <div class="feature"><div class="feature-icon">&#127912;</div><h3>Your brand, not ours</h3><p>Remove the Slotly watermark on Pro. White-label with your name and colors.</p></div>
+    <div class="feature"><div class="feature-icon">&#9889;</div><h3>Built on Cal.com</h3><p>Rock-solid open-source scheduling engine. Battle-tested by hundreds of thousands of users.</p></div>
+  </div>
+</section>
+<section class="quote-section">
+  <blockquote>"I was paying $20/mo for Calendly and still manually sending PayPal invoices after every call. Slotly does both in one step."</blockquote>
+  <cite>Beta tester, life coach</cite>
+</section>
+<section class="pricing">
+  <h2>Simple, honest pricing</h2>
+  <p class="subtitle">No annual trap. No per-transaction fees. Cancel anytime.</p>
+  <div class="pricing-grid">
+    <div class="plan">
+      <h3>Free</h3><div class="plan-price">$0</div><div class="plan-period">forever</div>
+      <ul><li>1 event type</li><li>Unlimited bookings</li><li>Google and Outlook sync</li><li>Slotly watermark</li><li>Email reminders</li></ul>
+    </div>
+    <div class="plan pro">
       <div class="plan-badge">Most popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price">$15<span>/mo per seat</span></div>
-      <div class="plan-desc">For SDRs who need CRM sync + follow-ups</div>
-      <ul>
-        <li><span class="check">✓</span> Everything in Free</li>
-        <li><span class="check">✓</span> HubSpot / Salesforce sync</li>
-        <li><span class="check">✓</span> No-show follow-up emails</li>
-        <li><span class="check">✓</span> Pre-meeting intake forms</li>
-        <li><span class="check">✓</span> Booking analytics</li>
-      </ul>
-      <a href="#" class="plan-cta">Start 14-day trial</a>
-    </div>
-    <div class="plan">
-      <div class="plan-name">Team</div>
-      <div class="plan-price">$49<span>/mo</span></div>
-      <div class="plan-desc">For SDR teams up to 5 reps</div>
-      <ul>
-        <li><span class="check">✓</span> Everything in Pro</li>
-        <li><span class="check">✓</span> Round-robin routing</li>
-        <li><span class="check">✓</span> Team booking link</li>
-        <li><span class="check">✓</span> Manager analytics dashboard</li>
-        <li><span class="check">✓</span> Up to 5 seats</li>
-      </ul>
-      <a href="#" class="plan-cta">Start free trial</a>
+      <h3>Pro</h3><div class="plan-price">$9</div><div class="plan-period">/month, billed monthly</div>
+      <ul><li>Unlimited event types</li><li>Payment collection (Stripe)</li><li>Package and bundle selling</li><li>Remove watermark</li><li>Intake forms + email summary</li><li>Priority support</li></ul>
     </div>
   </div>
+  <div class="early-banner"><strong>Early adopter deal:</strong> Sign up in the first 30 days and get <strong>$7/mo locked in forever.</strong> Price never goes up.</div>
 </section>
-
-<!-- FINAL CTA -->
-<div class="cta-band">
-  <h2>Ready to close more deals?</h2>
-  <p>Set up your team in 5 minutes. Free forever for solo reps.</p>
-  <a href="#" class="btn-white">Start for free →</a>
-</div>
-
-<!-- FOOTER -->
+<section class="cta-bottom">
+  <h2>Ready to stop juggling tools?</h2>
+  <p>Join the early access list. Get Slotly at the founder price.</p>
+  <form class="signup-form" action="REPLACE_WITH_FORMSPREE_URL" method="POST">
+    <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+    <button type="submit">Join early access</button>
+  </form>
+</section>
 <footer>
-  <p>Slotly is open source. <a href="https://github.com/Acustimet/slotly">View source code</a> (MIT License) · <a href="mailto:hello@slotly.app">hello@slotly.app</a></p>
+  <p style="margin-bottom:0.5rem;"><strong style="color:#333;">Slotly</strong> &mdash; Built for independent professionals.</p>
+  <p><a href="mailto:hello@slotly.app">hello@slotly.app</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Acustimet/slotly">Source code (AGPL)</a> &nbsp;&middot;&nbsp; <a href="#">Privacy</a> &nbsp;&middot;&nbsp; <a href="#">Terms</a></p>
 </footer>
-
 </body>
 </html>
