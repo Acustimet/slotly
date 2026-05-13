@@ -1,5 +1,5 @@
 # Slotly GTM Outreach Copy
-All posts use [LINK] as placeholder. Replace with live URL before posting.
+All posts use https://slotly-chi.vercel.app as placeholder. Replace with live URL before posting.
 
 ## 1. Reddit Post (r/freelance, r/coaching, r/Entrepreneur)
 
@@ -36,7 +36,7 @@ Pricing:
 
 Early adopter deal: Sign up in the first 30 days, lock in $7/mo forever.
 
-[LINK]
+https://slotly-chi.vercel.app
 
 Happy to answer questions. Would love feedback from people who'd actually use it.
 
@@ -58,7 +58,7 @@ Tweet 6: Pricing: Free: 1 event type, unlimited bookings, watermark. Pro: $9/mo,
 
 Tweet 7: Built on Cal.com (AGPL open source) so the scheduling engine is battle-tested. Source is public: github.com/Acustimet/slotly
 
-Tweet 8: If you're a coach, consultant, tutor, or freelancer who books appointments and collects payment — I'd love your feedback. Early access list: [LINK]. RT appreciated.
+Tweet 8: If you're a coach, consultant, tutor, or freelancer who books appointments and collects payment — I'd love your feedback. Early access list: https://slotly-chi.vercel.app. RT appreciated.
 
 ---
 
@@ -84,7 +84,7 @@ Pricing: Free (1 event, watermark). Pro $9/mo (everything). Early adopter $7/mo 
 
 Looking for 10 early users who will use it and give feedback. Solo coaches, consultants, tutors, freelancers.
 
-[LINK]
+https://slotly-chi.vercel.app
 
 ---
 
@@ -104,7 +104,7 @@ Also does: session packages (5-session pack, client books one at a time), intake
 
 Price: $9/mo Pro. Early beta at $7/mo locked forever.
 
-Looking for 5-10 coaches willing to try it and give honest feedback. [LINK]
+Looking for 5-10 coaches willing to try it and give honest feedback. https://slotly-chi.vercel.app
 
 No hard sell. If it's not better than what you have, I want to know why.
 
@@ -122,4 +122,4 @@ No hard sell. If it's not better than what you have, I want to know why.
 | Day 3 | Facebook coach groups | FB post |
 | Day 7+ | Product Hunt | After live app deployed |
 
-Replace [LINK] with landing page URL before posting.
+Replace https://slotly-chi.vercel.app with landing page URL before posting.

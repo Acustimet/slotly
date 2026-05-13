@@ -8,12 +8,13 @@ const PLANS = [
     id: "free",
     name: "Free",
     price: 0,
-    description: "Get started with core scheduling",
+    description: "Try it before you buy",
     features: [
       "1 event type",
       "Unlimited bookings",
-      "Cal.com integration",
+      "Calendar sync",
       "Email notifications",
+      "Slotly watermark",
     ],
     cta: "Get Started Free",
     href: "/signup",
@@ -22,13 +23,14 @@ const PLANS = [
   {
     id: "pro",
     name: "Pro",
-    price: 15,
-    description: "For individual SDRs and AEs",
+    price: 9,
+    description: "For coaches, consultants & freelancers",
     features: [
       "Unlimited event types",
-      "Custom branding",
-      "Round-robin routing",
-      "CRM webhook integrations",
+      "Stripe payment at booking",
+      "Session bundle packages",
+      "Pre-meeting intake forms",
+      "No Slotly watermark",
       "Priority email support",
     ],
     cta: "Get Pro",
@@ -37,18 +39,18 @@ const PLANS = [
   },
   {
     id: "team",
-    name: "Team",
-    price: 49,
-    description: "For SDR/BDR teams",
+    name: "Studio",
+    price: 29,
+    description: "For practices & agencies",
     features: [
       "Everything in Pro",
-      "Team management",
+      "Multiple booking pages",
       "Collective scheduling",
+      "Round-robin routing",
       "API access",
-      "Slack notifications",
       "Priority support",
     ],
-    cta: "Get Team",
+    cta: "Get Studio",
     href: null,
     highlighted: false,
   },
@@ -94,7 +96,7 @@ export default function PricingView({ currentPlan }: { currentPlan?: string | nu
     <div className="mx-auto max-w-5xl px-4 py-16">
       <div className="mb-12 text-center">
         <h1 className="text-emphasis mb-3 text-4xl font-bold">Simple, transparent pricing</h1>
-        <p className="text-default text-lg">Scheduling built for closing. Pick the plan that fits your team.</p>
+        <p className="text-default text-lg">Scheduling with built-in payments. Pick the plan that fits your practice.</p>
         {currentPlan && currentPlan !== "free" && (
           <p className="text-brand mt-3 text-sm font-medium">
             Your current plan: <span className="capitalize">{currentPlan}</span>
