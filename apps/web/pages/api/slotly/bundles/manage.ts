@@ -5,7 +5,7 @@ import prisma from "@calcom/prisma";
 const ALLOWED_CURRENCIES = ["usd", "eur", "gbp", "sek", "nok", "dkk", "cad", "aud"];
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getServerSession({ req, res });
+  const session = await getServerSession({ req });
   if (!session?.user?.id) return res.status(401).json({ error: "Unauthenticated" });
 
   const userId = session.user.id;
