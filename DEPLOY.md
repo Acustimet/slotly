@@ -112,12 +112,47 @@ yarn workspace @calcom/prisma db-deploy
 
 ---
 
+## Step 5b: Configure transactional email (Resend)
+
+Cal.com has native Resend support. You only need **2 env vars** — no SMTP config required.
+
+### Option A: Sandbox (MVP — no domain verification needed)
+
+1. Sign up at https://resend.com (free, no credit card)
+2. Go to API Keys → Create API Key (full access)
+3. Set in Vercel → Settings → Environment Variables:
+
+```
+RESEND_API_KEY=re_xxxx
+EMAIL_FROM=onboarding@resend.dev
+```
+
+4. Redeploy. Signup + booking confirmation emails will work immediately.
+
+> Limitation: emails appear to come from `onboarding@resend.dev`, not `noreply@slotly-chi.vercel.app`.
+> Fine for MVP — upgrade to Option B when you have a real domain.
+
+### Option B: Production (domain verified — recommended before first paying customer)
+
+1. In Resend dashboard → Domains → Add Domain → `slotly-chi.vercel.app` (or custom domain)
+2. Add the DNS records Resend shows you (in Vercel or Cloudflare)
+3. Set in Vercel:
+
+```
+RESEND_API_KEY=re_xxxx
+EMAIL_FROM=noreply@slotly-chi.vercel.app
+```
+
+4. Redeploy.
+
+---
+
 ## Step 6: Verify
 
 1. Visit https://slotly.vercel.app
 2. Should see: "Book, pay, done." landing page
-3. Click "Start free" → create account
-4. Create event type → verify booking page loads
+3. Click "Start free" → create account → check inbox for verification email
+4. Create event type → test booking → check inbox for confirmation email
 5. Done!
 
 ---
