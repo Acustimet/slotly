@@ -25,8 +25,8 @@ export default async function PricingPage() {
         select: { metadata: true },
       });
       const meta = user?.metadata as Record<string, unknown> | null;
-      if (meta?.closedatePlan && typeof meta.closedatePlan === "string") {
-        currentPlan = meta.closedatePlan;
+      if (meta?.slotlyPlan && typeof meta.slotlyPlan === "string") {
+        currentPlan = meta.slotlyPlan;
       }
     }
   } catch {

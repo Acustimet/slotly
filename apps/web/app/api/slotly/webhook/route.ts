@@ -23,8 +23,8 @@ async function updateUserPlan(userId: number, plan: string, subscriptionId: stri
     data: {
       metadata: {
         ...meta,
-        closedatePlan: plan,
-        closedateStripeSubscriptionId: subscriptionId,
+        slotlyPlan: plan,
+        slotlyStripeSubscriptionId: subscriptionId,
       },
     },
   });
@@ -51,8 +51,8 @@ export async function POST(req: Request) {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
-        const userId = session.metadata?.closedateUserId;
-        const plan = session.metadata?.closedatePlan;
+        const userId = session.metadata?.slotlyUserId;
+        const plan = session.metadata?.slotlyPlan;
         const subscriptionId = typeof session.subscription === "string" ? session.subscription : null;
 
         if (userId && plan && subscriptionId) {
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
         if (plan && customerId) {
           const user = await prisma.user.findFirst({
             where: {
-              metadata: { path: ["closedateStripeCustomerId"], equals: customerId },
+              metadata: { path: ["slotlyStripeCustomerId"], equals: customerId },
             },
             select: { id: true },
           });
@@ -87,7 +87,7 @@ export async function POST(req: Request) {
 
         const user = await prisma.user.findFirst({
           where: {
-            metadata: { path: ["closedateStripeCustomerId"], equals: customerId },
+            metadata: { path: ["slotlyStripeCustomerId"], equals: customerId },
           },
           select: { id: true, metadata: true },
         });
@@ -98,8 +98,8 @@ export async function POST(req: Request) {
             data: {
               metadata: {
                 ...meta,
-                closedatePlan: "free",
-                closedateStripeSubscriptionId: null,
+                slotlyPlan: "free",
+                slotlyStripeSubscriptionId: null,
               },
             },
           });

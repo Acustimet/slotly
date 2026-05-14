@@ -49,18 +49,18 @@ export async function POST(req: Request) {
   }
 
   const meta = (user.metadata as Record<string, unknown>) ?? {};
-  let customerId = meta.closedateStripeCustomerId as string | undefined;
+  let customerId = meta.slotlyStripeCustomerId as string | undefined;
 
   if (!customerId) {
     const customer = await stripe.customers.create({
       email: user.email,
       name: user.name ?? undefined,
-      metadata: { closedateUserId: String(session.user.id) },
+      metadata: { slotlyUserId: String(session.user.id) },
     });
     customerId = customer.id;
     await prisma.user.update({
       where: { id: session.user.id },
-      data: { metadata: { ...meta, closedateStripeCustomerId: customerId } },
+      data: { metadata: { ...meta, slotlyStripeCustomerId: customerId } },
     });
   }
 
@@ -73,8 +73,8 @@ export async function POST(req: Request) {
     success_url: `${baseUrl}/pricing?success=true&plan=${plan}`,
     cancel_url: `${baseUrl}/pricing?cancelled=true`,
     metadata: {
-      closedateUserId: String(session.user.id),
-      closedatePlan: plan,
+      slotlyUserId: String(session.user.id),
+      slotlyPlan: plan,
     },
   });
 
