@@ -88,9 +88,13 @@ SLOTLY_WEBHOOK_SECRET=[generate with: node -e "console.log(require('crypto').ran
 STRIPE_BUNDLE_WEBHOOK_SECRET=[from Stripe dashboard after registering /api/slotly/bundles/webhook]
 # Slotly SaaS billing (Stripe subscriptions)
 STRIPE_PRIVATE_KEY=[sk_test_... from Stripe dashboard → Developers → API keys]
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY=[pk_test_... from Stripe dashboard → Developers → API keys]
 SLOTLY_PRO_PRICE_ID=[price_... create a $9/mo recurring price in Stripe Products]
 SLOTLY_TEAM_PRICE_ID=[price_... create a $29/mo recurring price in Stripe Products]
 SLOTLY_STRIPE_WEBHOOK_SECRET=[whsec_... from Stripe dashboard after registering /api/slotly/webhook]
+# Stripe Connect (Flow 1: client pays pro at booking)
+STRIPE_CLIENT_ID=[ca_... from Stripe dashboard → Settings → Connect → Platform settings]
+STRIPE_WEBHOOK_SECRET=[whsec_... from Stripe dashboard after registering /api/integrations/stripepayment/webhook]
 ```
 
 ---
